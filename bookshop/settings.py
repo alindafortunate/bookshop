@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Local Apps
     "accounts",
+    "pages",
 ]
 
 MIDDLEWARE = [
@@ -61,7 +62,8 @@ ROOT_URLCONF = "bookshop.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        # for accessing the templates in one location
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
