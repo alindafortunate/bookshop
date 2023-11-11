@@ -1,0 +1,12 @@
+<!-- template/books/book_detail.html -->
+{% extends "_base.html" %}
+
+{% block title %}{{bookdetail.title}}{% endblock title %}
+
+{% block content %}
+<div class="book_detail">
+    <h2><a href="">{{bookdetail.title}}</a></h2>
+    <p>Author: {{bookdetail.author}}</p>
+    <p>Price: {{bookdetail.price}}</p>
+</div>
+{% endblock content %}
