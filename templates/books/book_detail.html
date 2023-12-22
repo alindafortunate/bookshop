@@ -5,8 +5,17 @@
 
 {% block content %}
 <div class="book_detail">
+    {% if bookdetail.cover %}
+    <img class="bookcover" src="{{bookdetail.cover.url}}" alt="{{bookdetail.title}}">
+    {% endif %}
     <h2><a href="">{{bookdetail.title}}</a></h2>
     <p>Author: {{bookdetail.author}}</p>
     <p>Price: {{bookdetail.price}}</p>
 </div>
+<h3>Reviews</h3>
+<ul>
+    {% for review in bookdetail.reviews.all %}
+    <li>{{review.review}} ({{review.author}})</li>
+    {% endfor %}
+</ul>
 {% endblock content %}
