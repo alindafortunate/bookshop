@@ -22,6 +22,9 @@ class BookDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     template_name = "books/book_detail.html"
     login_url = "account_login"
     permission_required = "books.special_status"
+    queryset = Books.objects.all().prefetch_related(
+        "reviews__author",
+    )
 
 
 class SearchResultsListView(ListView):
@@ -32,5 +35,5 @@ class SearchResultsListView(ListView):
     def get_queryset(self):
         query = self.request.GET.get("q")
         return Books.objects.filter(
-            Q(title__icontains=query) | Q(author__icontains=query )
+            Q(title__icontains=query) | Q(author__icontains=query)
         )
