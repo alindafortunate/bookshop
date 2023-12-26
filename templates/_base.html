@@ -8,9 +8,7 @@
     <title>{% block title %} Bookshop {% endblock title %} </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
@@ -26,16 +24,16 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'book_list' %}">Books</a>
                     </li>
-                    <li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'account_logout' %}">Log Out</a>
-                    </li>
+                        <a class="nav-link" aria-current="page" href="{% url 'account_logout' %}">Log Out</a>
+                    </li class="nav-item">
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
@@ -45,22 +43,30 @@
                     </li>
                     {% endif %}
                 </ul>
+                <div class="navbar-nav ml-auto">
+                    <form class="d-flex my-2 my-lg-0" action="{% url 'search_results' %}" method="get">
+                        <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
-    <div class="container">
-        {% block content %}
 
-        {% endblock content %}
+</body>
+<div class="container">
+    {% block content %}
 
-    </div>
-    <!-- Bootstrap JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-    <!-- JavaScript -->
-    <script src="{% static 'js/base.js' %}"></script>
+    {% endblock content %}
+
+</div>
+<!-- Bootstrap JavaScript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- JavaScript -->
+<script src="{% static 'js/base.js' %}"></script>
 </body>
 
 </html>
