@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False) == "True"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -201,3 +201,17 @@ EMAIL_HOST_USER = "apikey"
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+# Secure connections and security measures
+SECURE_SSL_REDIRECT = os.environ.get("SECURE_SSL_REDIRECT", False) == "True"
+
+# Strict transporty security
+SECURE_HSTS_SECONDS = 2592000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = (
+    os.environ.get("SECURE_HSTS_INCLUDE_SUBDOMAINS", False) == "True"
+)
+SECURE_HSTS_PRELOAD = os.environ.get("SECURE_HSTS_PRELOAD", False) == "True"
+
+SESSION_COOKIE_SECURE = os.environ.get("SESSION_COOKIE_SECURE", False) == "True"
+CSRF_COOKIE_SECURE = os.environ.get("CSRF_COOKIE_SECURE", False) == "True"
